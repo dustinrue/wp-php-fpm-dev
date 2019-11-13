@@ -20,4 +20,3 @@ RUN chmod +x /usr/local/bin/wp
 
 USER www-data
 WORKDIR /var/www/html
-ENTRYPOINT ["php-fpm", "-F"]
