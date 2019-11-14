@@ -1,5 +1,5 @@
 ARG PHP_VERSION=7.3
-FROM docker.10up.com/10up-systems/official-docker/centos-8/wp-php-fpm:${PHP_VERSION}-latest
+FROM dustinrue/wp-php-fpm:${PHP_VERSION}
 
 ARG PHP_VERSION=7.3
 
