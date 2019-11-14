@@ -10,6 +10,9 @@ RUN yum install \
   nc \
   wget \
   git \
+  strace \
+  telnet \
+  rsync \
   unzip -y && yum clean all
 
 WORKDIR /
@@ -19,4 +22,7 @@ RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x /usr/local/bin/wp
 
 USER www-data
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash && \
+  source ~/.bashrc && \
+  nvm install --lts
 WORKDIR /var/www/html
