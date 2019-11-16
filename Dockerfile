@@ -24,7 +24,7 @@ RUN chmod +x /usr/local/bin/wp
 RUN echo "catch_workers_output = yes" >> /etc/php-fpm.d/www.conf
 
 # entrypoint needs to manage the PHP config but will be running as www-data
-# Get things setup and then rw-own the files necessary to allow this
+# Get things setup and then re-own the files necessary to allow this
 RUN  mkdir /etc/php-extensions-available; \
   mv /etc/php.d/15-xdebug.ini /etc/php-extensions-available; \
   chown www-data -R /etc/php*
