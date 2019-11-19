@@ -14,6 +14,7 @@ RUN yum install \
   telnet \
   rsync \
   vim \
+  sudo \
   unzip -y && yum clean all
 
 WORKDIR /
@@ -22,6 +23,7 @@ RUN sh /composer-installer.sh && mv /composer.phar /usr/local/bin/composer && ch
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp
 RUN chmod +x /usr/local/bin/wp
 RUN echo "catch_workers_output = yes" >> /etc/php-fpm.d/www.conf
+RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/enable-all
 
 # entrypoint needs to manage the PHP config but will be running as www-data
 # Get things setup and then re-own the files necessary to allow this
