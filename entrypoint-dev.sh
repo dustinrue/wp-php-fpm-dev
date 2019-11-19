@@ -14,7 +14,7 @@ function fix_linux_internal_host() {
 
   if ! grep $DOCKER_INTERNAL_HOST /etc/hosts > /dev/null ; then
     DOCKER_INTERNAL_IP=`/sbin/ip route|awk '/default/ { print $3 }'`
-    sudo echo -e "$DOCKER_INTERNAL_IP\t$DOCKER_INTERNAL_HOST" | tee -a /etc/hosts > /dev/null
+    echo -e "$DOCKER_INTERNAL_IP\t$DOCKER_INTERNAL_HOST" | sudo tee -a /etc/hosts > /dev/null
     echo 'Added $DOCKER_INTERNAL_HOST to hosts /etc/hosts'
   fi
 }
