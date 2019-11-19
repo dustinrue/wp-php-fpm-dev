@@ -8,4 +8,20 @@ else
   rm -f /etc/php.d/15-xdebug.ini
 fi
 
+# Ensure we have the host.docker.internal hostname available to linux as well
+function fix_linux_internal_host() {
+  DOCKER_INTERNAL_HOST="host.docker.internal"
+
+  if ! grep $DOCKER_INTERNAL_HOST /etc/hosts > /dev/null ; then
+    DOCKER_INTERNAL_IP=`/sbin/ip route|awk '/default/ { print $3 }'`
+    echo -e "$DOCKER_INTERNAL_IP\t$DOCKER_INTERNAL_HOST" | tee -a /etc/hosts > /dev/null
+    echo 'Added $DOCKER_INTERNAL_HOST to hosts /etc/hosts'
+  fi
+}
+
+if [ $(whoami) != "www-data" ]; then
+    # highly likely we're on Linux and wp-local-docker, fix the internal host
+    fix_linux_internal_host
+fi
+
 exec /entrypoint.sh
